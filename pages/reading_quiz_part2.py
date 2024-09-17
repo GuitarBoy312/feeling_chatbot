@@ -24,8 +24,8 @@ def generate_question():
     마지막으로, 질문에 대한 4개의 선택지를 한국어로 제공해주세요. 
     정답은 선택지 중 하나여야 합니다.
     출력 형식:
-    지문: (영어 지문)
     질문: (한국어 질문)
+    지문: (영어 지문)
     선택지:
     1. (선택지 1)
     2. (선택지 2)
@@ -120,13 +120,14 @@ def main():
         # 문제 데이터 파싱
         passage, question, options, correct_answer = parse_question_data(st.session_state.question_data)
 
-        st.subheader("영어 지문")
-        st.write(passage)
-
         st.subheader("질문")
         st.write(question)
 
-        st.subheader("선택지")
+        st.divider()
+        st.write(passage)
+
+        
+        st.subheader("다음 중 알맞은 답을 골라보세요.")
         for i, option in enumerate(options, 1):
             if st.checkbox(option, key=f"option_{i}", value=st.session_state.selected_option == i):
                 st.session_state.selected_option = i
