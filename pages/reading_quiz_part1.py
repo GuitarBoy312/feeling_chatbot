@@ -14,9 +14,9 @@ def generate_question():
  ''')
     
     key_expression = (f'''
-A:What did you do yesterday?
+A:What did you(someone's name) do yesterday?
 B:{answer1}
-A:What did you do there?
+A:What did you(someone's name) do there?
 B:.......
 ''')
     prompt = f"""{key_expression}과 같은 구문을 사용 하는 CEFR A1 수준의 간단한 영어 대화를 생성해주세요. 
