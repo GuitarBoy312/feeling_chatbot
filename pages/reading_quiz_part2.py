@@ -35,9 +35,11 @@ def generate_question():
 
     response = client.chat.completions.create(
         model="gpt-4o-mini",
-        messages=[{"role": "user", "content": prompt}]
-    )
-
+        messages=[
+            {"role": "system", "content": "너는 EFL 환경인 한국의 초등학교 영어교사야. 초등학생 수준에 맞는 한국어와 영어를 써줘."},
+            {"role": "user", "content": "prompt"}
+        ]
+    )      
     return response.choices[0].message.content
 
 def parse_question_data(data):
