@@ -15,7 +15,7 @@ def generate_question():
     A:What did you do yesterday?
     B:{answer1}
     A:What did you do there?
-    B:I learned about Korean history
+    B:........
     ''')
     prompt = f"""
     {key_expression}을 이용하여CEFR A1 수준의 영어 지문을 4-6문장으로 작성해주세요. 
