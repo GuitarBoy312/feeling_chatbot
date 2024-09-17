@@ -8,13 +8,14 @@ import random
 client = OpenAI(api_key=st.secrets["openai_api_key"])
 
 def generate_question():
+    name = random.choice(["You","Eric","Mia","Paul","Sara","Someone's name"])
     answer1 = random.choice([" I went to the history museum.", "I played badminton.", 
                              " I watched a movie."," I went to the space center."," I made a car.","I went fishing.","I went shopping","I went to the park.","I went to the library.","I went to the museum.",
                              "I played soccer","I played basketball", "I played baseball","I played tennis"])       
     key_expression = (f'''
-    A:What did you(Tom) do yesterday?
+    A:What did {name} do yesterday?
     B:{answer1}
-    A:What did you(Tom) do there?
+    A:What did {name} do there?
     B:........
     ''')
     prompt = f"""
