@@ -64,6 +64,26 @@ def text_to_speech(text):
     
     return audio_tag
 
+def generate_explanation(question, correct_answer, user_answer, dialogue):
+    prompt = f"""
+    다음 영어 대화와 관련된 질문에 대해 학생이 오답을 선택했습니다. 
+    대화: {dialogue}
+    질문: {question}
+    정답: {correct_answer}
+    학생의 답변: {user_answer}
+    
+    이 학생에게 왜 그들의 답변이 틀렸는지, 그리고 정답이 무엇인지 설명해주세요. 
+    설명은 친절하고 격려하는 톤으로 작성해주세요. 
+    대화의 내용을 참조하여 구체적으로 설명해주세요.
+    """
+
+    response = client.chat.completions.create(
+        model="gpt-4o-mini",
+        messages=[{"role": "user", "content": prompt}]
+    )
+
+    return response.choices[0].message.content
+
 # Streamlit UI
 
 # 메인 화면 구성
@@ -128,9 +148,6 @@ if 'question_generated' in st.session_state and st.session_state.question_genera
     st.markdown("### 대화 듣기")
     st.markdown(st.session_state.audio_tag, unsafe_allow_html=True)
     
-   
-    #st.text(st.session_state.dialogue)
-    
     with st.form(key='answer_form'):
         selected_option = st.radio("정답을 선택하세요:", st.session_state.options, index=None)
         submit_button = st.form_submit_button(label='정답 확인')
@@ -138,13 +155,21 @@ if 'question_generated' in st.session_state and st.session_state.question_genera
         if submit_button:
             if selected_option:
                 st.info(f"선택한 답: {selected_option}")
-                #st.info(f"정답: {st.session_state.correct_answer}")  # 정답 출력
-                # 공백 제거 후 비교
                 if selected_option.strip() == st.session_state.correct_answer.strip():  
                     st.success("정답입니다!")
                     st.text(st.session_state.dialogue)
                 else:
                     st.error(f"틀렸습니다. 정답은 {st.session_state.correct_answer}입니다.")
                     st.text(st.session_state.dialogue)
+                    
+                    # 오답 설명 생성
+                    explanation = generate_explanation(
+                        st.session_state.question,
+                        st.session_state.correct_answer,
+                        selected_option,
+                        st.session_state.dialogue
+                    )
+                    st.markdown("### 오답 설명")
+                    st.write(explanation)
             else:
                 st.warning("답을 선택해주세요.")
