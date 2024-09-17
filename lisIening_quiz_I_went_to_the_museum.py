@@ -64,13 +64,48 @@ def text_to_speech(text):
     
     return audio_tag
 
-st.title("초등학생 영어 듣기 문제 생성기")
+# Streamlit UI
+
+# 메인 화면 구성
+st.header("✨인공지능 영어 퀴즈 선생님 퀴즐링👱🏾‍♂️")
+st.markdown("**❓어제 한 일에 대한 퀴즈**")
+st.divider()
+
+#확장 설명
+with st.expander("❗❗ 글상자를 펼쳐 사용방법을 읽어보세요 👆✅", expanded=False):
+    st.markdown(
+    """     
+    1️⃣ [새 문제 만들기] 버튼을 눌러 문제 만들기.<br>
+    2️⃣ [재생]▶ 버튼을 누르고 대화를 들어보기.<br> 
+    3️⃣ [녹음 시작] 버튼을 다시 눌러 대답하고 이어서 바로 질문하기.<br>
+    4️⃣ 1~3번을 반복하기. 말문이 막힐 땐 [잠깐 멈춤] 버튼을 누르기.<br>
+    <br>
+    🙏 잉글링은 완벽하게 이해하거나 제대로 대답하지 않을 수 있어요.<br> 
+    🙏 그럴 때에는 [처음부터 다시하기] 버튼을 눌러주세요.
+    """
+    ,  unsafe_allow_html=True)
+    st.divider()
+    st.write("다음 보기 중 골라서 잉글링에게 질문해 보세요.")
+    st.markdown('''
+    🔸 Are you happy? (아 유 해피?)<br>
+    🔸 Are you sad? (아 유 새드?)<br>
+    🔸 Are you angry? (아 유 앵그리?)<br>
+    🔸 Are you hungry? (아 유 헝그리?)<br>
+    🔸 Are you thirsty? (아 유 떨스티?)<br>
+    🔸 Are you tired? (아 유 다이얼드?)
+    ''', unsafe_allow_html=True)
+    st.divider()
+    st.write("잉글링의 질문을 듣고, 다음 보기 중 골라서 대답해 보세요.")
+    st.markdown('''
+    🔸 Yes, I am.(예스 아이 앰.)<br>
+    🔸 No, I'm not.(노 아임 낫.)
+    ''', unsafe_allow_html=True)
 
 # 세션 상태 초기화
 if 'question_generated' not in st.session_state:
     st.session_state.question_generated = False
 
-if st.button("새 문제 생성"):
+if st.button("새 문제 만들기"):
     # 세션 상태 초기화
     for key in list(st.session_state.keys()):
         del st.session_state[key]
@@ -106,9 +141,10 @@ if 'question_generated' in st.session_state and st.session_state.question_genera
     st.write(st.session_state.question)
     
     # 저장된 음성 태그 사용
+    st.markdown("### 대화")
     st.markdown(st.session_state.audio_tag, unsafe_allow_html=True)
     
-    st.markdown("### 대화")
+   
     #st.text(st.session_state.dialogue)
     
     with st.form(key='answer_form'):
