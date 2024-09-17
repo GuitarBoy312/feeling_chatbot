@@ -92,17 +92,24 @@ def main():
             if st.checkbox(option, key=f"option_{i}", value=st.session_state.selected_option == i):
                 st.session_state.selected_option = i
 
-        if st.button("정답 확인"):
-            st.session_state.show_answer = True
-
-        if st.session_state.show_answer:
-            if st.session_state.selected_option is not None:
-                if st.session_state.selected_option == correct_answer:
+        if submit_button:
+            if selected_option:
+                st.info(f"선택한 답: {selected_option}")
+                if selected_option.strip() == st.session_state.correct_answer.strip():  
                     st.success("정답입니다!")
                 else:
-                    st.error(f"틀렸습니다. 정답은 {correct_answer}번입니다.")
+                    st.error(f"틀렸습니다. 정답은 {st.session_state.correct_answer}입니다.")
+            
+            # 오답 풀이 추가
+                    explanation_response = client.chat.completions.create(
+                        model="gpt-4o-mini",
+                        messages=[
+                            {"role": "system", "content": "당신은 초등학생을 위한 영어 학습 도우미입니다."},
+                            {"role": "user", "content": f"다음 대화와 질문에 대해 {st.session_state.correct_answer}가 정답인 이유를 초등학생이 이해할 수 있게 한국어로 간단히 설명해주세요:\n\n대화:\n{st.session_state.dialogue}\n\n질문:\n{st.session_state.question}"}
+                        ]
+                    )
+                    explanation = explanation_response.choices[0].message.content
+                    st.markdown("### 오답 풀이")
+                    st.write(explanation)
             else:
-                st.warning("선택지를 선택해주세요.")
-
-if __name__ == "__main__":
-    main()
+                st.warning("답을 선택해주세요.")
