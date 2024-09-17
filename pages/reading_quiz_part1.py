@@ -9,7 +9,7 @@ def generate_question():
     answer1 = random.choice([" I went to the history museum.", "I played badminton.", " I watched a movie."," I went to the space center."," I made a car.","I went fishing.","I went shopping","I went to the park.","I went to the library.","I went to the museum.","I played soccer","I played basketball", "I played baseball","I played tennis"])       
     question_format = (                          
  f'''
-대화를 읽고 {answer1}에 관해 묻는 질문,
+대화를 읽고 어제 뭘했는지 또는 거기서 뭘했는지에 관해 묻는 질문,
 예시:
  ''')
     
@@ -17,7 +17,7 @@ def generate_question():
 A:What did you do yesterday?
 B:{answer1}
 A:What did you do there?
-B:I learned about Korean history
+B:.......
 ''')
     prompt = f"""{key_expression}과 같은 구문을 사용 하는 CEFR A1 수준의 간단한 영어 대화를 생성해주세요. 
     영어 대화를 생성할 때, 마지막 대화 내용은 알려주지 말고대화 내용에 관한 객관식 질문으로 만들어야 합니다. 
