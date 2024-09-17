@@ -10,7 +10,7 @@ def generate_question():
     answer1 = random.choice([" I went to the history museum.", "I played badminton.", " I watched a movie."," I went to the space center."," I made a car.","I went fishing.","I went shopping","I went to the park.","I went to the library.","I went to the museum.","I played soccer","I played basketball", "I played baseball","I played tennis"])       
     question_format = (                          
  f'''
-대화를 듣고 {answer1} 또는 What did you do there?에 관해 묻는 질문,
+대화를 듣고 어제 뭘했는지 또는 거기서 뭘 했는지에 관해 묻는 질문,
 예시:
  ''')
     
