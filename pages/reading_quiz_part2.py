@@ -12,9 +12,9 @@ def generate_question():
                              " I watched a movie."," I went to the space center."," I made a car.","I went fishing.","I went shopping","I went to the park.","I went to the library.","I went to the museum.",
                              "I played soccer","I played basketball", "I played baseball","I played tennis"])       
     key_expression = (f'''
-    A:What did you(someone's name) do yesterday?
+    A:What did you(Tom) do yesterday?
     B:{answer1}
-    A:What did you(someone's name) do there?
+    A:What did you(Tom) do there?
     B:........
     ''')
     prompt = f"""
