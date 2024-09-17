@@ -53,7 +53,7 @@ B:I learned about Korean history
 
 # 메인 화면 구성
 st.header("✨인공지능 영어 퀴즈 선생님 퀴즐링👱🏾‍♂️")
-st.markdown("**❓어제 한 일에 대한 듣기 퀴즈**")
+st.markdown("**❓어제 한 일에 대한 읽기 퀴즈**")
 st.divider()
 
 #확장 설명
