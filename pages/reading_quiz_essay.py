@@ -88,7 +88,7 @@ def main():
     # Streamlit UI
 
     # 메인 화면 구성
-    st.header("✨인공지능 영어 퀴즈 선생님 퀴즐링👱🏾‍♂️")
+    st.header("✨인공지능 영어 퀴즈 선생님 퀴즐링🕵️‍♂️")
     st.markdown("**❓어제 한 일에 대한 문장 읽기 퀴즈**")
     st.divider()
 
